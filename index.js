@@ -10,7 +10,7 @@ class ProductManager {
     addProduct(title, description, price, thumbnail, code, stock) {
 
         if (!this.products.find(product => product.code === code) && (title && description && code && price && thumbnail && stock)) {
-            ProductManager.id++;
+            ProductManager.lastProductId++;
 
             const newProduct = {
                 id: ProductManager.lastProductId,
