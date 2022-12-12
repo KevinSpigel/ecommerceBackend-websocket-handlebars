@@ -1,45 +1,20 @@
 
-class ProductManager {
+const ProductManager = require('./ProductManager');
 
-    static lastProductId = 0;
+const ecommerce = new ProductManager ('./database/productsDataBase.json');
 
-    constructor() {
-        this.products = [];
-    }
-
-    addProduct(title, description, price, thumbnail, code, stock) {
-
-        if (!this.products.find(product => product.code === code) && (title && description && code && price && thumbnail && stock)) {
-            ProductManager.lastProductId++;
-
-            const newProduct = {
-                id: ProductManager.lastProductId,
-                title,
-                description,
-                price,
-                thumbnail,
-                code,
-                stock,
-            };
-
-            this.products.push(newProduct);
-        }
-    }
+const fileProcess = async () =>{
+    try{
 
 
-    getProducts() {
-        return this.products;
-    };
-
-    getProductById(productId) {
-        const productById = this.products.find((product) => product.id === productById);
-        if (productById) {
-            console.log(productById)
-        } else {
-            console.error("Not found")
-        }
+        const testUpdate = await ecommerce.updateProduct(1,{code:24})
+        console.log(testUpdate)
 
     }
 
+    catch (error){
+        throw new Error (error) 
+    }
 };
 
+fileProcess();

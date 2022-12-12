@@ -1,0 +1,12 @@
+[
+    {
+        "id": "1",
+        "title":"Coca",
+        "description":"esta muy barata",
+        "price":"15",
+        "thumbnail":"www.prueba.com",
+        "code":"765",
+        "stock":"3"
+
+    }
+]
