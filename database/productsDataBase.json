@@ -1,20 +1,20 @@
 [
 	{
-		"id": "1",
+		"id": 1,
 		"title": "Coca",
 		"description": "esta muy barata",
-		"price": "15",
+		"price": 15,
 		"thumbnail": "www.prueba.com",
-		"code": "24",
-		"stock": "3"
+		"code": 75,
+		"stock": 3
 	},
 	{
-		"id": "2",
+		"id": 2,
 		"title": "Pepsi",
 		"description": "esta muy cara",
-		"price": "20",
+		"price": 20,
 		"thumbnail": "www.prueba2.com",
-		"code": "32",
-		"stock": "5"
+		"code": 32,
+		"stock": 5
 	}
 ]
