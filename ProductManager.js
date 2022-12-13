@@ -15,6 +15,7 @@ class ProductManager {
         if (existsSync(this.path)) {
             const dataProducts = await fs.readFile(this.path, 'utf-8');
             const allProducts = JSON.parse(dataProducts);
+            allProducts.id= Number(allProducts.id);
             return allProducts;
         }
         else {
@@ -22,7 +23,7 @@ class ProductManager {
         }
     }
 
-    async saveProducts() {
+    async saveProducts(allProducts) {
         await fs.writeFile(this.path, JSON.stringify(allProducts, null, '\t'));
     }
 
@@ -46,7 +47,7 @@ class ProductManager {
 
             data.push(newProduct);
 
-            await this.saveProducts();
+            await this.saveProducts(data);
         }
     }
 
@@ -61,9 +62,10 @@ class ProductManager {
     };
 
     async getProductById(id) {
-        const productById = await this.getProducts().find((product) => product.id === id);
+        const allProducts = await this.getProducts();
+        const productById = allProducts.find((product) => product.id === id);
         if (productById) {
-            return productById //no deberia parsear porque allProduct ya esta parseado.
+            return productById
         } else {
             console.error("Not found")
         }
@@ -84,7 +86,7 @@ class ProductManager {
             }
         })
 
-        const stringList = await fs.writeFile(this.path, JSON.stringify(updatedList, null, '\t')) //no pude reutilizar la funcion saveProduct().
+        const stringList = await fs.writeFile(this.path, JSON.stringify(updatedList, null, '\t')) 
 
         return stringList
     }
