@@ -5,7 +5,7 @@
 		"description": "esta muy barata",
 		"price": 15,
 		"thumbnail": "www.prueba.com",
-		"code": 75,
+		"code": "75",
 		"stock": 3
 	},
 	{
@@ -14,7 +14,7 @@
 		"description": "esta muy cara",
 		"price": 20,
 		"thumbnail": "www.prueba2.com",
-		"code": 32,
+		"code": "32",
 		"stock": 5
 	}
 ]

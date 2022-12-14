@@ -15,7 +15,8 @@ class ProductManager {
         if (existsSync(this.path)) {
             const dataProducts = await fs.readFile(this.path, 'utf-8');
             const allProducts = JSON.parse(dataProducts);
-            // allProducts.id= Number(allProducts.id);
+            allProducts.forEach(product => {product.id=Number(product.id)
+            });
             return allProducts;
         }
         else {

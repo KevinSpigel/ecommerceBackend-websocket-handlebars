@@ -7,7 +7,7 @@ const fileProcess = async () =>{
     try{
 
 
-        const testUpdate = await ecommerce.updateProduct(1,{code:24})
+        const testUpdate = await ecommerce.updateProduct(1,{code:"24"})
         console.log(testUpdate)
 
     }
