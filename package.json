@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/KevinSpigel/ecommerceBackend/issues"
   },
-  "homepage": "https://github.com/KevinSpigel/ecommerceBackend#readme"
+  "homepage": "https://github.com/KevinSpigel/ecommerceBackend#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
