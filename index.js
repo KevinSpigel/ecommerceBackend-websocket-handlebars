@@ -1,36 +1,36 @@
 const ProductManager = require("./ProductManager");
+
 const express = require("express");
 
 const app = express();
 
+// app.use(express.urlencoded({ extended: true }));
+
 const ecommerce = new ProductManager("./database/productsDataBase.json");
 
-const allProducts = ecommerce.getProducts(); //NO ME DEJA UTILIZAR EL AWAIT PARA ESPERAR LA EJECUCION DE LA FUNCION ASINCRONA
+app.get("/products/", async (req, res) => {
+  let products = await ecommerce.getProducts();
 
-app.get("/products", (req, res) => {
-  res.send(allProducts);
+  const productsLimit = req.query.limit;
+
+  if (productsLimit) products = products.slice(0, Number(productsLimit));
+
+  res.send(products);
 });
 
-app.get("/products/", (req, res) => {
-  const productLimit = Number(req.query.limit);
-
-  const productsToShow = allProducts.slice(0, productLimit++); //NO SE ME OCURRIO OTRA MANERA DE TRAER LA CANTIDAD DE PRODUCTOS QUE DEFINE EL QUERYPARAM
-
-  if (!productLimit) {
-    return res.send(allProducts);
-  } else {
-    res.send(productsToShow);
-  }
-});
-
-app.get("/products/:productId", (req, res) => {
+app.get("/products/:productId", async (req, res) => {
   const productId = req.params.productId;
+
+  const allProducts = await ecommerce.getProducts();
+
   const product = allProducts.find(
     (product) => product.id === Number(productId)
   );
+
   if (!product) {
     return res.status(404).send("Product not found");
   }
+
   res.send(product);
 });
 
