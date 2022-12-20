@@ -4,7 +4,15 @@ const express = require("express");
 
 const app = express();
 
-// app.use(express.urlencoded({ extended: true }));
+const port = 8080; 
+
+app.listen(port, () => {
+  console.log("The Server is up and running in the port", port);
+});
+
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const ecommerce = new ProductManager("./database/productsDataBase.json");
 
@@ -34,9 +42,6 @@ app.get("/products/:productId", async (req, res) => {
   res.send(product);
 });
 
-app.listen(8080, () => {
-  console.log("Server is up and running on port 8080");
-});
 
 // const fileProcess = async () => {
 //   try {
