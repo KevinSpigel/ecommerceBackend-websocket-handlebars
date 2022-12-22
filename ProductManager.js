@@ -87,12 +87,9 @@ class ProductManager {
       }
     });
 
-    const stringList = await fs.writeFile(
-      this.path,
-      JSON.stringify(updatedList, null, "\t")
-    );
+    this.saveProducts(updatedList);
 
-    return stringList;
+    return updatedList;
   }
 
   async deleteProduct(id) {
