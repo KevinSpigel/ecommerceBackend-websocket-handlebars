@@ -1,10 +1,10 @@
 const { Router } = require("express");
 
 const router = Router();
+
 const products = [];
 
 // Routes
-
 router.get("/", (req, res) => {
   res.json({
     status: "success",
