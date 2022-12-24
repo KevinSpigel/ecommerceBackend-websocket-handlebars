@@ -26,10 +26,9 @@ app.get("/products/", async (req, res) => {
     if (isNaN(integerProductsLimit)) {
       return res.status(400).send("productsLimit must be a valid number");
     }
-  }
-
-  if (integerProductsLimit <= 0 || integerProductsLimit > products.length) {
-    return res.status(404).send("Products not found");
+    if (integerProductsLimit <= 0 || integerProductsLimit > products.length) {
+      return res.status(404).send("Products not found");
+    }
   }
 
   if (integerProductsLimit) products = products.slice(0, integerProductsLimit);
