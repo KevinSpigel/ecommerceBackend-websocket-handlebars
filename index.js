@@ -61,10 +61,33 @@ app.get("/products/:productId", async (req, res) => {
   res.send(product);
 });
 
+
+
 // const fileProcess = async () => {
 //   try {
-//     const testUpdate = await ecommerce.updateProduct(1, { code: "24" });
-//     console.log(testUpdate);
+//     console.log("Adding product");
+//     const addProductTest = await ecommerce.addProduct({
+//       title: "test product",
+//       description: "adddProductTest",
+//       price: "50",
+//       thumbnail: "empty",
+//       code: "98",
+//       stock: "20",
+//     });
+//     console.log(addProductTest);
+
+//     console.log("Get product by Id");
+//     const getProductByIdTest = await ecommerce.getProductById(1);
+//     console.log(getProductByIdTest);
+
+//     console.log("Update product by Id");
+//     const updateTest = await ecommerce.updateProduct(1, { code: "24" });
+//     console.log(updateTest);
+
+//     console.log("Delete product by Id");
+//     const deleteProductTest = await ecommerce.deleteProduct(2);
+//     console.log(deleteProductTest);
+ 
 //   } catch (error) {
 //     throw new Error(error);
 //   }
