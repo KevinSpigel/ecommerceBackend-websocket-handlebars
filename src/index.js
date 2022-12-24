@@ -1,4 +1,4 @@
-const ProductManager = require("./ProductManager");
+const ProductManager = require("./manager/ProductManager");
 
 const express = require("express");
 
@@ -61,8 +61,6 @@ app.get("/products/:productId", async (req, res) => {
   res.send(product);
 });
 
-
-
 // const fileProcess = async () => {
 //   try {
 //     console.log("Adding product");
@@ -87,7 +85,7 @@ app.get("/products/:productId", async (req, res) => {
 //     console.log("Delete product by Id");
 //     const deleteProductTest = await ecommerce.deleteProduct(2);
 //     console.log(deleteProductTest);
- 
+
 //   } catch (error) {
 //     throw new Error(error);
 //   }
