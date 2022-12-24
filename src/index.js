@@ -1,19 +1,34 @@
-const ProductManager = require("./manager/ProductManager");
-
 const express = require("express");
+const apiRoutes = require("./routers/app.routers");
 
 const app = express();
-
 const port = 8080;
 
+// Listen
 app.listen(port, () => {
   console.log("The Server is up and running in the port", port);
 });
 
+// Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
-const ecommerce = new ProductManager("./database/productsDataBase.json");
+// Routes
+app.use("/products", apiRoutes);
+
+app.use((error, req, res, next) => {
+  //para manejo de errores. Debe encontrarse al final de todo.
+  res.status(500).json({
+    status: "error",
+    error,
+  });
+});
+
+
+
+
+
 
 app.get("/products/", async (req, res) => {
   let products = await ecommerce.getProducts();
@@ -60,6 +75,10 @@ app.get("/products/:productId", async (req, res) => {
 
   res.send(product);
 });
+
+// const ProductManager = require("./manager/ProductManager");
+
+// const ecommerce = new ProductManager("./database/productsDataBase.json");
 
 // const fileProcess = async () => {
 //   try {
