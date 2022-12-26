@@ -1,13 +1,12 @@
 const { Router } = require("express");
 const multer = require("multer");
-const path = require("path");
 
 const router = Router();
 
-// Multer test
+// Multer
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.resolve(__dirname + "../../public/img"));
+    cb(null, "/public/img");
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname);
@@ -31,3 +30,4 @@ router.post("/", uploader.single("file"), (req, res) => {
 });
 
 module.exports = router;
+module.exports = uploader;

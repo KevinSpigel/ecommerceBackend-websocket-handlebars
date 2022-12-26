@@ -25,9 +25,17 @@ class ProductManager {
     await fs.writeFile(this.path, JSON.stringify(allProducts, null, "\t"));
   }
 
-  async addProduct(title, description, price, thumbnail, code, stock) {
+  async addProduct(
+    title,
+    description,
+    price,
+    thumbnail,
+    code,
+    stock,
+    category,
+    status
+  ) {
     const data = await this.getProducts();
-
     if (
       !this.data.find((product) => product.code === code) &&
       title &&
@@ -35,7 +43,9 @@ class ProductManager {
       code &&
       price &&
       thumbnail &&
-      stock
+      stock &&
+      category &&
+      status
     ) {
       ProductManager.lastProductId++;
 
@@ -47,6 +57,8 @@ class ProductManager {
         thumbnail,
         code,
         stock,
+        category,
+        status,
       };
 
       data.push(newProduct);
