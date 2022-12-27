@@ -28,16 +28,16 @@ class ProductManager {
   async addProduct(
     title,
     description,
+    code,
     price,
     thumbnail,
-    code,
     stock,
     category,
     status
   ) {
     const data = await this.getProducts();
     if (
-      !this.data.find((product) => product.code === code) &&
+      !data.find((product) => product.code === code) &&
       title &&
       description &&
       code &&
@@ -53,9 +53,9 @@ class ProductManager {
         id: ProductManager.lastProductId,
         title,
         description,
+        code,
         price,
         thumbnail,
-        code,
         stock,
         category,
         status,
@@ -64,6 +64,8 @@ class ProductManager {
       data.push(newProduct);
 
       await this.saveProducts(data);
+
+      return newProduct;
     }
   }
 
@@ -99,7 +101,7 @@ class ProductManager {
       }
     });
 
-    this.saveProducts(updatedList);
+    await this.saveProducts(updatedList);
 
     return updatedList;
   }
@@ -107,7 +109,7 @@ class ProductManager {
   async deleteProduct(id) {
     const products = await this.getProducts();
     const filteredById = products.filter((product) => product.id !== id);
-    this.saveProducts(filteredById);
+    await this.saveProducts(filteredById);
     return filteredById;
   }
 }

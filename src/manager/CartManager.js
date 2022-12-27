@@ -1,9 +1,6 @@
 const fs = require("fs/promises");
 const { existsSync } = require("fs");
 
-const ProductManager = require("../../manager/ProductManager");
-const ecommerce = new ProductManager("./database/productsDataBase.json");
-
 class CartManager {
   static lastCartId = 0;
 
@@ -30,14 +27,16 @@ class CartManager {
 
   async addCart() {
     const data = await this.getCarts();
-    const newIdCart = CartManager.lastCartId++;
+    CartManager.lastCartId++;
     const newCart = {
-      id: newIdCart,
+      id: CartManager.lastCartId,
       products: [],
     };
 
     data.push(newCart);
     await this.saveCarts(data);
+
+    return newCart;
   }
 
   async getCartById(id) {
@@ -80,7 +79,7 @@ class CartManager {
       }
     });
 
-    this.saveCarts(updatedList);
+    await this.saveCarts(updatedList);
     return `product id ${pid} update from id cart ${cartById.id} `;
   }
 
@@ -108,7 +107,7 @@ class CartManager {
         }
       });
 
-      this.saveCarts(updatedList);
+      await this.saveCarts(updatedList);
       return `product id ${pid} delete from id cart ${cartById.id} `;
     }
   }
@@ -116,7 +115,7 @@ class CartManager {
   async deleteCart(id) {
     const AllCarts = await this.getCarts();
     const filteredById = AllCarts.filter((cart) => cart.id !== id);
-    this.saveCarts(filteredById);
+    await this.saveCarts(filteredById);
     return filteredById;
   }
 }

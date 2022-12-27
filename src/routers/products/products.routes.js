@@ -11,19 +11,10 @@ const ecommerce = new ProductManager("./database/productsDataBase.json");
 
 //CREATE new product
 
-router.post("", uploader.array("thumbnail"), async (req, res) => {
-  const { addNewProduct } = req.body;
+router.post("", async (req, res) => {
+  const addNewProduct = req.body;
 
-  const newProduct = await ecommerce.addProduct(
-    addNewProduct.title,
-    addNewProduct.description,
-    addNewProduct.code,
-    +addNewProduct.price,
-    addNewProduct.thumbnail,
-    +addNewProduct.stock,
-    addNewProduct.category,
-    addNewProduct.status
-  );
+  const newProduct = await ecommerce.addProduct(addNewProduct);
 
   res.send({ status: "success", payload: newProduct });
 });
@@ -59,7 +50,7 @@ router.get("", async (req, res) => {
 //GET product by id
 
 router.get("/:pid", async (req, res) => {
-  const productId = req.params.productId;
+  const productId = req.params.pid;
 
   if (isNaN(productId)) {
     return res
@@ -85,12 +76,14 @@ router.get("/:pid", async (req, res) => {
 });
 
 //UPDATE product by id
-router.put("/:pid", uploader.array("thumbnail"), async (req, res) => {
+router.put("/:pid", async (req, res) => {
   const pid = +req.params.pid;
   const product = req.body;
   const productById = await ecommerce.getProductById(pid);
   const price = product.price ? +product.price : productById.price;
   const stock = product.stock ? +product.stock : productById.stock;
+  const thumbnail = product.thumbnail;
+  const status = product.status;
   const newProductProperties = {
     ...product,
     thumbnail,
@@ -108,7 +101,7 @@ router.put("/:pid", uploader.array("thumbnail"), async (req, res) => {
 //DELETE product by id
 
 router.delete("/:pid", async (req, res) => {
-  const productId = req.params.productId;
+  const productId = req.params.pid;
 
   if (isNaN(productId)) {
     return res

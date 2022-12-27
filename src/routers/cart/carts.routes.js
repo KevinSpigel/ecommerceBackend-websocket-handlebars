@@ -38,13 +38,13 @@ router.get("", async (req, res) => {
 
   if (integerCartLimit) carts = carts.slice(0, integerCartLimit);
 
-  res.send({ status: "success", payload: products });
+  res.send({ status: "success", payload: carts });
 });
 
 //GET cart by id
 
 router.get("/:cid", async (req, res) => {
-  const cartId = req.params.cartId;
+  const cartId = req.params.cid;
 
   if (isNaN(cartId)) {
     return res
