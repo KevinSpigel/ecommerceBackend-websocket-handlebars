@@ -84,6 +84,27 @@ router.get("/:pid", async (req, res) => {
   res.send({ status: "success", payload: productById });
 });
 
+//UPDATE product by id
+router.put("/:pid", uploader.array("thumbnail"), async (req, res) => {
+  const pid = +req.params.pid;
+  const product = req.body;
+  const productById = await ecommerce.getProductById(pid);
+  const price = product.price ? +product.price : productById.price;
+  const stock = product.stock ? +product.stock : productById.stock;
+  const newProductProperties = {
+    ...product,
+    thumbnail,
+    price,
+    stock,
+    status,
+  };
+  const productUpdated = await ecommerce.updateProduct(
+    pid,
+    newProductProperties
+  );
+  res.send({ status: "success", message: productUpdated });
+});
+
 //DELETE product by id
 
 router.delete("/:pid", async (req, res) => {
