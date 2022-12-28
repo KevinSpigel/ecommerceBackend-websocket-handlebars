@@ -14,7 +14,16 @@ const ecommerce = new ProductManager("./database/productsDataBase.json");
 router.post("", async (req, res) => {
   const addNewProduct = req.body;
 
-  const newProduct = await ecommerce.addProduct(addNewProduct);
+  const newProduct = await ecommerce.addProduct(
+    addNewProduct.title,
+    addNewProduct.description,
+    addNewProduct.code,
+    +addNewProduct.price,
+    addNewProduct.thumbnail,
+    +addNewProduct.stock,
+    addNewProduct.category,
+    addNewProduct.status
+  );
 
   res.send({ status: "success", payload: newProduct });
 });
@@ -82,8 +91,10 @@ router.put("/:pid", async (req, res) => {
   const productById = await ecommerce.getProductById(pid);
   const price = product.price ? +product.price : productById.price;
   const stock = product.stock ? +product.stock : productById.stock;
-  const thumbnail = product.thumbnail;
-  const status = product.status;
+  const thumbnail = product.thumbnail
+    ? +product.thumbnail
+    : productById.thumbnail;
+  const status = product.status ? +product.status : productById.status;
   const newProductProperties = {
     ...product,
     thumbnail,
