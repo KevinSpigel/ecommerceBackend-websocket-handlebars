@@ -1,4 +1,5 @@
 const express = require("express");
+const { Server } = require("socket.io");
 const handlebars = require("express-handlebars");
 
 const viewsRoutes = require("./routers/views.routes");
@@ -8,8 +9,24 @@ const app = express();
 const port = 8080;
 
 // Listen
-app.listen(port, () => {
+const httpServer = app.listen(port, () => {
   console.log("The Server is up and running in the port", port);
+});
+
+// Socket server side
+const socketServer = new Server(httpServer);
+
+socketServer.on("connection", (socket) => {
+  console.log("New client connected");
+  console.log("Welcome", socket.id);
+
+  socket.on("message", (data) => {
+    console.log("new message from the client");
+    console.log(data);
+  });
+
+  //message from server to client
+  socket.emit("individual socket", "This message is for an specific socket");
 });
 
 // Template Engine

@@ -1,14 +1,7 @@
 <div>
-  <h1>Hi, {{user.name}}! Nice to meet you!</h1>
-
-  {{#if user.isAdmin}}
-    {{#each list}}
-    <div>
-      <p>Product: {{this.item}}</p>
-      <p>Price: {{this.price}}</p>
-    </div>
-    {{/each }}
-  {{else}}
-  <h2>You do not have permission to view the content</h2>
-  {{/if}}
+  Ready to work with Websockets!
 </div>
+
+{{!-- script which stores all FrontEnd logic --}}
+<script src="/socket.io/socket.io.js"></script>
+<script src="/public/script.js"></script>
