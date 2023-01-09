@@ -11,15 +11,16 @@ const ecommerce = new ProductManager("./database/productsDataBase.json");
 
 //CREATE new product
 
-router.post("", async (req, res) => {
+router.post("", uploader.single("thumbnail"), async (req, res) => {
   const addNewProduct = req.body;
+  const filename= req.file.filename;
 
   const newProduct = await ecommerce.addProduct(
     addNewProduct.title,
     addNewProduct.description,
     addNewProduct.code,
     +addNewProduct.price,
-    addNewProduct.thumbnail,
+    addNewProduct.thumbnail=`http://localhost:8080/img/${filename}`,
     +addNewProduct.stock,
     addNewProduct.category,
     addNewProduct.status
