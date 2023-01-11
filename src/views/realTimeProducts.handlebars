@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Product platform</title>
-  </head>
-  <body>
-    <h1>New product</h1>
-    <form action="/api/products" method="post" enctype="multipart/form-data">
+
+<div>     
+  <h1>Product List</h1>
+<div id="dynamicAllProducts"></div>
+</div>
+
+
+<div>
+    <h3>Add new product</h3>
+    <form action="/api/products" method="post" id="newProductForm" enctype="multipart/form-data">
       <input type="text" placeholder="Title" name="title" />
       <input type="text" placeholder="Description" name="description" />
       <input type="text" placeholder="Code" name="code" />
@@ -19,5 +18,9 @@
       <input type="file" name="thumbnail" id="thumbnail">
       <input type="submit" value="Submit" />
     </form>
-  </body>
-</html>
+  </div>
+
+
+{{!-- script which stores all FrontEnd logic --}}
+<script src="/socket.io/socket.io.js"></script>
+<script src="/static/script.js"></script>

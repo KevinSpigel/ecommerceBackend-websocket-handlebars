@@ -6,28 +6,30 @@ const viewsRoutes = require("./routers/views.routes");
 const apiRoutes = require("./routers/app.routers");
 
 const app = express();
-const port = process.env.port || 8080;
+const PORT = process.env.PORT || 8080;
 
 // Listen
-const httpServer = app.listen(port, () => {
-  console.log("The Server is up and running in the port", port);
+const httpServer = app.listen(PORT, () => {
+  console.log("The Server is up and running in the port", PORT);
 });
 
 // Socket server side
-const socketServer = new Server(httpServer);
 
-socketServer.on("connection", (socket) => {
+const products=[];
+
+const io = new Server(httpServer);
+
+io.on("connection", (socket) => {
   console.log("New client connected");
-  console.log("Welcome", socket.id);
 
-  socket.on("message", (data) => {
-    console.log("new message from the client");
-    console.log(data);
+  socket.emit ("products-logs", products);
+
+  socket.on("newProduct", (newProduct) => {
+    products.push(newProduct);
+    io.emit("products-logs", products);
   });
-
-  //message from server to client
-  socket.emit("individual socket", "This message is for an specific socket");
 });
+
 
 // Template Engine
 app.engine("handlebars", handlebars.engine());

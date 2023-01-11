@@ -2,12 +2,13 @@ const { Router } = require("express");
 
 const router = Router();
 
-// --> Handlebars test + Socket test
-
 router.get("/", (req, res) => {
-  res.render("index", {});
+  res.render("home", {});
 });
 
-//<--
+router.get("/realtimeproducts", (req, res) => {
+  res.render("realTimeProducts", {});
+});
+
 
 module.exports = router;
