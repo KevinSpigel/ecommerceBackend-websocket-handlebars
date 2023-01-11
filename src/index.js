@@ -6,7 +6,7 @@ const viewsRoutes = require("./routers/views.routes");
 const apiRoutes = require("./routers/app.routers");
 
 const app = express();
-const port = 8080;
+const port = process.env.port || 8080;
 
 // Listen
 const httpServer = app.listen(port, () => {
