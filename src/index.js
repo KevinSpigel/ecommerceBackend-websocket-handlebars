@@ -13,22 +13,32 @@ const httpServer = app.listen(PORT, () => {
   console.log("The Server is up and running in the port", PORT);
 });
 
-// Socket server side
 
-const products=[];
+//--->
 
+// SOCKET
 const io = new Server(httpServer);
 
-io.on("connection", (socket) => {
-  console.log("New client connected");
+// const ProductManager = require("./manager/ProductManager");
+// const ecommerce = new ProductManager("./database/productsDataBase.json");
 
-  socket.emit ("products-logs", products);
+const products = [];
 
-  socket.on("newProduct", (newProduct) => {
-    products.push(newProduct);
-    io.emit("products-logs", products);
+  io.on("connection",   (socket) => {
+    console.log("New client connected");
+
+    //async estaba antes del parametro del socket
+  // products = await ecommerce.getProducts();
+    
+    socket.emit("products-logs", products);
+
+    socket.on("newProduct", (newProduct) => {
+      product.push(newProduct);
+      io.emit("products-logs", products);
+    });
   });
-});
+  
+//<---
 
 
 // Template Engine

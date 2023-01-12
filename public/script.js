@@ -2,8 +2,6 @@
 // Socket server connection --> connection event
 const socket = io();
 
-
-
 //START utility functions
 const getHtml = (template) => template.join("\n");
 
@@ -22,30 +20,29 @@ const renderProduct = (newProduct) => {
   return html;
 };
 
-
 //END utility functions
 
-//DOM elemets
-const allProducts = document.getElementById("allProducts");
+//DOM elements
 const dynamicAllProducts = document.getElementById("dynamicAllProducts");
 const newProductForm = document.getElementById("newProductForm");
-
+const messageDiv = document.getElementById("messageDiv");
 
 //Socket Emitters
 newProductForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  if(event === "submit"){
-      socket.emit("newProduct", {newProduct});
-}});
+  if (event === "submit") {
+    socket.emit("newProduct", {newProduct});
+  }
+});
 
 
 //Socket listeners
+
 socket.on("products-logs", (data) => {
-    const html = getHtml(
-      data.map((item) => {
-          renderProduct(newProduct)
-      })
-    );
-    allProducts.innerHTML = html;
-    dynamicAllProducts.innerHTML = html;
-  });
+  const html = getHtml(
+    data.map((item) => {
+      renderProduct(newProduct);
+    })
+  );
+  dynamicAllProducts.innerHTML = html;
+});

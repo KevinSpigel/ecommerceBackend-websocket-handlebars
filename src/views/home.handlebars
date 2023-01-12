@@ -1,10 +1,14 @@
-
 <div>
-    <h1>Product List</h1>
-<div id="allProducts"></div>
+  <h1>Product List</h1>
+
+  {{#if status}}
+    {{#each list}}
+      <div>
+        <p>Product: {{this.title}}</p>
+        <p>Price: {{this.price}}</p>
+      </div>
+    {{/each}}
+  {{else}}
+    <h2>{{data}}</h2>
+  {{/if}}
 </div>
-
-
-{{!-- script which stores all FrontEnd logic --}}
-<script src="/socket.io/socket.io.js"></script>
-<script src="/static/script.js"></script>
