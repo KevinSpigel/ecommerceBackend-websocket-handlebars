@@ -2,47 +2,35 @@
 // Socket server connection --> connection event
 const socket = io();
 
-//START utility functions
-const getHtml = (template) => template.join("\n");
-
-const renderProduct = (newProduct) => {
-  const html = getHtml([
-    '<div class="">',
-    `<span class="">${newProduct.title}</span>`,
-    `<span class="">${newProduct.description}</span>`,
-    `<span class="">${newProduct.code}</span>`,
-    `<span class="">${newProduct.price}</span>`,
-    `<span class="">${newProduct.stock}</span>`,
-    `<span class="">${newProduct.category}</span>`,
-    `<img src="${newProduct.thumbnail}" alt="${newProduct.title}">`,
-    "</div>",
-  ]);
-  return html;
-};
-
-//END utility functions
-
 //DOM elements
-const dynamicAllProducts = document.getElementById("dynamicAllProducts");
-const newProductForm = document.getElementById("newProductForm");
-const messageDiv = document.getElementById("messageDiv");
+const form = document.getElementById("newProductForm");
+const productListContainer = document.getElementById("product-list-container");
 
 //Socket Emitters
-newProductForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-  if (event === "submit") {
-    socket.emit("newProduct", {newProduct});
-  }
-});
 
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const formData = new FormData(form);
+  const requestOptions = {
+    method: "POST",
+    body: formData,
+    redirect: "manual",
+  };
+
+  fetch("http://localhost:8080/realtimeproducts", requestOptions)  //Send formData object within the body request, to be received in req.body from newProduct function
+  
+  form.reset();
+});
 
 //Socket listeners
 
-socket.on("products-logs", (data) => {
-  const html = getHtml(
-    data.map((item) => {
-      renderProduct(newProduct);
-    })
-  );
-  dynamicAllProducts.innerHTML = html;
+socket.on("newProduct", (data) => {
+  const newProductDiv = document.createElement("div");
+  newProductDiv.innerHTML = `
+      <div>
+          <p>Product:${data.title}</p>
+          <p>Price: $${data.price}</p>
+      </div>`;
+
+  productListContainer.append(newProductDiv);
 });

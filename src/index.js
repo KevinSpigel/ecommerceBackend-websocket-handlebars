@@ -14,31 +14,13 @@ const httpServer = app.listen(PORT, () => {
 });
 
 
-//--->
-
 // SOCKET
 const io = new Server(httpServer);
 
-// const ProductManager = require("./manager/ProductManager");
-// const ecommerce = new ProductManager("./database/productsDataBase.json");
-
-const products = [];
-
-  io.on("connection",   (socket) => {
-    console.log("New client connected");
-
-    //async estaba antes del parametro del socket
-  // products = await ecommerce.getProducts();
-    
-    socket.emit("products-logs", products);
-
-    socket.on("newProduct", (newProduct) => {
-      product.push(newProduct);
-      io.emit("products-logs", products);
-    });
+  io.on("connection", (socket) => {
+    console.log("New client connected")
+    app.set("socket", socket)
   });
-  
-//<---
 
 
 // Template Engine

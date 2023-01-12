@@ -1,14 +1,30 @@
 <div>
   <h1>Product List</h1>
+  <div id="product-list-container">
+    {{#if status}}
+      {{#each list}}
+        <div>
+          <p>Product: {{this.title}}</p>
+          <p>Price: ${{this.price}}</p>
+        </div>
+      {{/each}}
+    {{else}}
+      <h2>{{data}}</h2>
+    {{/if}}
+  </div>
+</div>
 
-  {{#if status}}
-    {{#each list}}
-      <div>
-        <p>Product: {{this.title}}</p>
-        <p>Price: {{this.price}}</p>
-      </div>
-    {{/each}}
-  {{else}}
-    <h2>{{data}}</h2>
-  {{/if}}
+<div>
+  <h3>Add new product</h3>
+  <form action="/api/products" method="post" enctype="multipart/form-data">
+    <input type="text" placeholder="Title" name="title" />
+    <input type="text" placeholder="Description" name="description" />
+    <input type="text" placeholder="Code" name="code" />
+    <input type="number" placeholder="Price" name="price" />
+    <input type="number" placeholder="Stock" name="stock" />
+    <input type="text" placeholder="Category" name="category" />
+    <input type="text" placeholder="Status" name="status" />
+    <input type="file" name="thumbnail" id="thumbnail" />
+    <input type="submit" value="Submit" />
+  </form>
 </div>
