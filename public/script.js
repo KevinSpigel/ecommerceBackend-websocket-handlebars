@@ -26,11 +26,19 @@ form.addEventListener("submit", (event) => {
 
 socket.on("newProduct", (data) => {
   const newProductDiv = document.createElement("div");
-  newProductDiv.innerHTML = `
-      <div>
-          <p>Product:${data.title}</p>
-          <p>Price: $${data.price}</p>
-      </div>`;
+  newProductDiv.innerHTML = 
+      `<div class="card card-product" style="width: 18rem;">
+            <img
+              class="card-img-top"
+              src="../../statics/img/${data.thumbnails}"
+              alt="{{this.title}}"
+            />
+            <div class="card-body">
+              <h3 class="card-title">${data.title}</h3>
+              <h5 class="card-title">${data.price}</h5>
+              <p class="card-text">${data.description}</p>
+            </div>
+          </div>`;
 
   productListContainer.append(newProductDiv);
 });
