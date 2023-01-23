@@ -30,7 +30,7 @@ socket.on("newProduct", (data) => {
       `<div class="card card-product" style="width: 18rem;">
             <img
               class="card-img-top"
-              src="../../statics/img/${data.thumbnails}"
+              src="/static/img/${data.thumbnail}"
               alt="{{this.title}}"
             />
             <div class="card-body">

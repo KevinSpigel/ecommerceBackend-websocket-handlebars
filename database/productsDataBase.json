@@ -31,5 +31,16 @@
 		"stock": 60,
 		"category": "prueba",
 		"status": "success"
+	},
+	{
+		"id": 1,
+		"title": "test",
+		"description": "test",
+		"code": "test",
+		"price": 1,
+		"thumbnail": "1674498096290-descarga.jpg",
+		"stock": 1,
+		"category": "test",
+		"status": "test"
 	}
 ]

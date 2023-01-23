@@ -1,13 +1,13 @@
 <div class="d-flex row justify-content-center">
   <div>
     <h1>Products List</h1>
-    <div class="d-flex justify-content-around mt-4" id="product-list-container">
+    <div class="d-flex flex-wrap justify-content-around mt-4" id="product-list-container">
       {{#if status}}
         {{#each list}}
           <div class="card card-product" style="width: 18rem;">
             <img
               class="card-img-top"
-              src="../../statics/img/{{this.thumbnails}}"
+              src="/static/img/{{this.thumbnail}}"
               alt="{{this.title}}"
             />
             <div class="card-body">

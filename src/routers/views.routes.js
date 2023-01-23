@@ -61,7 +61,7 @@ router.post(
       addNewProduct.description,
       addNewProduct.code,
       +addNewProduct.price,
-      (addNewProduct.thumbnail = `http://localhost:8080/img/${filename}`),
+      addNewProduct.thumbnail = filename,
       +addNewProduct.stock,
       addNewProduct.category,
       addNewProduct.status
