@@ -1,8 +1,10 @@
 const { Router } = require("express");
+const {options} = require("../../config/options");
 
-const CartManager = require("../../manager/CartManager");
 
-const ecommerce = new CartManager("./database/cartDataBase.json");
+const CartManager = require("../../dao/fileManager/CartManager");
+
+const ecommerce = new CartManager(options.FileSystem.carts);
 
 const router = Router();
 

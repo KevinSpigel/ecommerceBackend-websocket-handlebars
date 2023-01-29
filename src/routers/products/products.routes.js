@@ -2,10 +2,12 @@ const { Router } = require("express");
 
 const uploader = require("../../utils");
 
+const {options} = require("../../config/options");
+
 const router = Router();
 
-const ProductManager = require("../../manager/ProductManager");
-const ecommerce = new ProductManager("./database/productsDataBase.json");
+const ProductManager = require("../../dao/fileManager/ProductManager");
+const ecommerce = new ProductManager(options.FileSystem.products);
 
 // Routes
 

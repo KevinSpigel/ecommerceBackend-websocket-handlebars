@@ -1,10 +1,12 @@
 const { Router } = require("express");
 const uploader = require("../utils");
+const {options} = require("../config/options");
 
 const router = Router();
 
-const ProductManager = require("../manager/ProductManager");
-const ecommerce = new ProductManager("./database/productsDataBase.json");
+const ProductManager = require("../dao/fileManager/ProductManager");
+
+const ecommerce = new ProductManager(options.FileSystem.products);
 
 router.get("/", async (req, res) => {
   const product = await ecommerce.getProducts();
@@ -61,7 +63,7 @@ router.post(
       addNewProduct.description,
       addNewProduct.code,
       +addNewProduct.price,
-      addNewProduct.thumbnail = filename,
+      (addNewProduct.thumbnail = filename),
       +addNewProduct.stock,
       addNewProduct.category,
       addNewProduct.status
@@ -70,5 +72,19 @@ router.post(
     res.send({ status: "success" });
   }
 );
+
+// CHAT
+router.get('/chat', (req, res) => {
+
+  const data = {
+    status: true,
+    title: "Chat",
+    style: "index.css",
+  };
+
+  res.render('chat', data);
+});
+
+
 
 module.exports = router;

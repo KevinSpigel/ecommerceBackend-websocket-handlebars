@@ -1,7 +1,10 @@
 <div class="d-flex row justify-content-center">
-  <div>
+  <div class="mt-3">
     <h1>Products List</h1>
-    <div class="d-flex flex-wrap justify-content-around mt-4" id="product-list-container">
+    <div
+      class="d-flex flex-wrap justify-content-around mt-4"
+      id="product-list-container"
+    >
       {{#if status}}
         {{#each list}}
           <div class="card card-product" style="width: 18rem;">
@@ -25,81 +28,83 @@
   </div>
 
   <div class="card mt-5">
-    <h2>Add new product</h2>
-    <h6>On real time</h6>
-    <div class="d-flex justify-content-center column">
-      <form
-        action="/realtimeproducts"
-        method="post"
-        id="newProductForm"
-        enctype="multipart/form-data"
-      >
-        <div>
-          <input
-            class="form-control mb-2 col-2"
-            type="text"
-            placeholder="Title"
-            name="title"
-            required
-          />
-          <input
-            class="form-control mb-2 col-2"
-            type="text"
-            placeholder="Description"
-            name="description"
-            required
-          />
-          <input
-            class="form-control mb-2 col-2"
-            type="text"
-            placeholder="Code"
-            name="code"
-            required
-          />
-          <input
-            class="form-control mb-2 col-2"
-            type="number"
-            placeholder="Price"
-            name="price"
-            required
-          />
-          <input
-            class="form-control mb-2 col-2"
-            type="number"
-            placeholder="Stock"
-            name="stock"
-            required
-          />
-          <input
-            class="form-control mb-2 col-2"
-            type="text"
-            placeholder="Category"
-            name="category"
-            required
-          />
-          <input
-            class="form-control mb-2 col-2"
-            type="text"
-            placeholder="Status"
-            name="status"
-            required
-          />
+    <div class="mt-4">
+      <h2>Add new product</h2>
+      <h6>On real time</h6>
+      <div class="d-flex justify-content-center column">
+        <form
+          action="/realtimeproducts"
+          method="post"
+          id="newProductForm"
+          enctype="multipart/form-data"
+        >
           <div>
             <input
-              class="mt-2 form-control-sm form-control-file"
-              type="file"
-              name="thumbnail"
-              id="thumbnail"
+              class="form-control mb-2 col-2"
+              type="text"
+              placeholder="Title"
+              name="title"
               required
             />
+            <input
+              class="form-control mb-2 col-2"
+              type="text"
+              placeholder="Description"
+              name="description"
+              required
+            />
+            <input
+              class="form-control mb-2 col-2"
+              type="text"
+              placeholder="Code"
+              name="code"
+              required
+            />
+            <input
+              class="form-control mb-2 col-2"
+              type="number"
+              placeholder="Price"
+              name="price"
+              required
+            />
+            <input
+              class="form-control mb-2 col-2"
+              type="number"
+              placeholder="Stock"
+              name="stock"
+              required
+            />
+            <input
+              class="form-control mb-2 col-2"
+              type="text"
+              placeholder="Category"
+              name="category"
+              required
+            />
+            <input
+              class="form-control mb-2 col-2"
+              type="text"
+              placeholder="Status"
+              name="status"
+              required
+            />
+            <div>
+              <input
+                class="mt-2 form-control-sm form-control-file"
+                type="file"
+                name="thumbnail"
+                id="thumbnail"
+                required
+              />
+            </div>
           </div>
-        </div>
-        <button
-          class="mt-4 btn btn-success"
-          type="submit"
-          value="Submit"
-        >Submit</button>
-      </form>
+          <button
+            class="m-4 btn btn-success"
+            type="submit"
+            value="Submit"
+          >Submit</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
