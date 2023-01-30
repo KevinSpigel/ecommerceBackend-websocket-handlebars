@@ -1,6 +1,7 @@
 const express = require("express");
 const { Server } = require("socket.io");
 const handlebars = require("express-handlebars");
+require("./config/dbConfig");
 
 const viewsRoutes = require("./routers/views.routes");
 const apiRoutes = require("./routers/app.routers");
@@ -13,30 +14,27 @@ const httpServer = app.listen(PORT, () => {
   console.log("The Server is up and running in the port", PORT);
 });
 
-
 // SOCKET
 
 const io = new Server(httpServer);
 
 const messages = [];
 
-  io.on("connection", (socket) => {
-    console.log("New client connected")
-    app.set("socket", socket)
+io.on("connection", (socket) => {
+  console.log("New client connected");
+  app.set("socket", socket);
 
-    socket.on("login", (user) => {
-      socket.emit("message-logs", messages);
-      socket.emit("welcome", user);
-      socket.broadcast.emit("new-user", user);
-    });
-  
-    socket.on("message", (data) => {
-      messages.push(data);
-      io.emit("message-logs", messages);
-    });
+  socket.on("login", (user) => {
+    socket.emit("message-logs", messages);
+    socket.emit("welcome", user);
+    socket.broadcast.emit("new-user", user);
   });
 
-
+  socket.on("message", (data) => {
+    messages.push(data);
+    io.emit("message-logs", messages);
+  });
+});
 
 // Template Engine
 app.engine("handlebars", handlebars.engine());
