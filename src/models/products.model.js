@@ -20,8 +20,8 @@ const productsSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  thumbnails: {
-    type: [],
+  thumbnail: {
+    type: [String],
     required: true,
   },
   stock: {
