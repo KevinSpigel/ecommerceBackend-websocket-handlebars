@@ -32,7 +32,7 @@ socket.on("newProduct", (data) => {
             <img
               class="card-img-top"
               src="/static/img/${data.thumbnail}"
-              alt="{{this.title}}"
+              alt="${data.title}"
             />
             <div class="card-body">
               <h3 class="card-title">${data.title}</h3>
