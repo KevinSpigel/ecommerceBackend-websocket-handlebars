@@ -9,7 +9,7 @@ const router = Router();
 
 const ProductMongoManager = require("../dao/mongoManager/productManager.mongoose");
 
-const ecommerce= new ProductMongoManager;
+const ecommerce= new ProductMongoManager();
 
 router.get("/", async (req, res) => {
   const product = await ecommerce.getProducts();

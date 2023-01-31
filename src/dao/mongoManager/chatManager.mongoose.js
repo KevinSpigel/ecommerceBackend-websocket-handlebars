@@ -3,7 +3,7 @@ const { messagesModel } = require("../../models/chat.model.js");
 class ChatMongoManager {
   async getMessages() {
     try {
-      const listMessages = await messagesModel.find();
+      const listMessages = await messagesModel.find().lean();
       return listMessages;
     } catch (error) {
       throw new Error(`Couldn't read file ${error}`);

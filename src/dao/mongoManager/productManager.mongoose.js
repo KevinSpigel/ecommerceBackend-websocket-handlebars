@@ -3,7 +3,7 @@ const { productsModel } = require("../../models/products.model.js");
 class ProductMongoManager {
   async getProducts() {
     try {
-      const allProducts = await productsModel.find();
+      const allProducts = await productsModel.find().lean();
       return allProducts;
     } catch (error) {
       throw new Error(`Couldn't read file ${error}`);
