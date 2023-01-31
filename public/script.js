@@ -36,7 +36,7 @@ socket.on("newProduct", (data) => {
             />
             <div class="card-body">
               <h3 class="card-title">${data.title}</h3>
-              <h5 class="card-title">${data.price}</h5>
+              <h5 class="card-title">$${data.price}</h5>
               <p class="card-text">${data.description}</p>
             </div>
           </div>`;

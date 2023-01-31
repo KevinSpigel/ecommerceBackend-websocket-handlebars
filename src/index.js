@@ -6,6 +6,9 @@ require("./config/dbConfig");
 const viewsRoutes = require("./routers/views.routes");
 const apiRoutes = require("./routers/app.routers");
 
+const ChatMongoManager = require("./dao/mongoManager/chatManager.mongoose");
+const messages = new ChatMongoManager();
+
 const app = express();
 const PORT = process.env.PORT || 8080;
 
@@ -18,23 +21,47 @@ const httpServer = app.listen(PORT, () => {
 
 const io = new Server(httpServer);
 
-const messages = [];
-
 io.on("connection", (socket) => {
   console.log("New client connected");
   app.set("socket", socket);
 
-  socket.on("login", (user) => {
-    socket.emit("message-logs", messages);
+  const getChats = async () => {
+    const msg = await messages.getMessages();
+    socket.emit("message-logs", msg);
+  };
+
+  socket.on("login", async (user) => {
+    await getChats();
     socket.emit("welcome", user);
     socket.broadcast.emit("new-user", user);
   });
 
-  socket.on("message", (data) => {
-    messages.push(data);
-    io.emit("message-logs", messages);
+  socket.on("message", async (data) => {
+    await messages.addMessages(data);
+    const msg = await messages.getMessages();
+    io.emit("message-logs", msg);
   });
 });
+
+// const io = new Server(httpServer);
+
+// const messages = [];
+
+// io.on("connection", (socket) => {
+//   console.log("New client connected");
+//   app.set("socket", socket);
+
+//   socket.on("login", (user) => {
+//     socket.emit("message-logs", messages);
+//     socket.emit("welcome", user);
+//     socket.broadcast.emit("new-user", user);
+//   });
+
+//   socket.on("message", (data) => {
+//     messages.push(data);
+//     io.emit("message-logs", messages);
+//   });
+// });
 
 // Template Engine
 app.engine("handlebars", handlebars.engine());

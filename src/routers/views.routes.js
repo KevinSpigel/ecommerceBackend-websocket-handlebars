@@ -13,8 +13,7 @@ const ecommerce= new ProductMongoManager;
 
 router.get("/", async (req, res) => {
   const product = await ecommerce.getProducts();
-
-  if (product) {
+  if (product && (product != false)) {
     const data = {
       status: true,
       title: "Home",
@@ -35,7 +34,7 @@ router.get("/", async (req, res) => {
 router.get("/realtimeproducts", async (req, res) => {
   const product = await ecommerce.getProducts();
 
-  if (product) {
+  if (product && (product != false)) {
     const data = {
       status: true,
       title: "Real Time Products",
@@ -104,7 +103,7 @@ module.exports = router;
 // router.get("/", async (req, res) => {
 //   const product = await ecommerce.getProducts();
 
-//   if (product) {
+//   if (product && (product != false)) {
 //     const data = {
 //       status: true,
 //       title: "Home",
@@ -125,7 +124,7 @@ module.exports = router;
 // router.get("/realtimeproducts", async (req, res) => {
 //   const product = await ecommerce.getProducts();
 
-//   if (product) {
+//   if (product && (product != false)) {
 //     const data = {
 //       status: true,
 //       title: "Real Time Products",
