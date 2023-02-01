@@ -42,5 +42,7 @@ socket.on("newProduct", (data) => {
           </div>`;
 
   productListContainer.append(newProductDiv);
+  
+  window.location.reload()
 });
 
